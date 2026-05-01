@@ -6,6 +6,8 @@
 #ifndef IO_H
 #define IO_H
 
+#define LOOP_LOG_INTERVAL 100000
+
 /*
  * Initialises the IO interface for the rocket.
  *
@@ -28,5 +30,14 @@ int set_takeoff_signal(void);
  * This allows to know that the parachute should have been deployed.
  */
 int set_parachute_deployed_signal(void);
+
+/*
+ * Displays msg to Serial output.
+ *
+ * If the same msg is displayed multiple times, it will only be displayed
+ * every LOOP_LOG_INTERVAL call.
+ * The same is meant in term of the pointer.
+ */
+void debug_log(const char *msg);
 
 #endif /* IO_H */
