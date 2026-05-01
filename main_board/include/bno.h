@@ -1,3 +1,8 @@
+/*
+ * Copyright (C) 2026 CLES-FACIL
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 #ifndef DATA_BNO_H
 #define DATA_BNO_H
 
