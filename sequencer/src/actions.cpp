@@ -20,6 +20,7 @@ int do_ready_actions(flight_status_t &status)
 {
 	// If the jack is connected we have not taken off
 	if(jack_connected()){
+		debug_log("Waiting for takeoff");
 		return 0;
 	}
 	
@@ -29,6 +30,7 @@ int do_ready_actions(flight_status_t &status)
 	status.current_stage = FLYING;
 
 	set_takeoff_signal();
+	debug_log("Jack unplugged takeoff");
 	return 0;
 }
 
@@ -36,11 +38,13 @@ int do_flying_actions(flight_status_t &status)
 {
 	// If we are before t1 return because we do not want to deploy the parachute.
 	if(status.t1 > get_absolute_time()){
+		debug_log("Flying");
 		return 0;
 	}
 	
 	// If we reach t2 or get the signal we deploy the parachute.
 	if(status.t2 <= get_absolute_time() || deployment_signal_received()){
+		debug_log("Deploying parachute");
 		deploy_parachute();
 		status.current_stage = GLIDING;
 	}
@@ -49,10 +53,12 @@ int do_flying_actions(flight_status_t &status)
 
 int do_gliding_actions(flight_status_t &status)
 {
+	debug_log("Gliding");
 	return 0;
 }
 
 int do_landed_actions(flight_status_t &status)
 {
+	debug_log("Landed");
 	return 0;
 }

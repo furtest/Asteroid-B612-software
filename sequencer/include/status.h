@@ -26,11 +26,17 @@ static inline int get_parachute_deploy_time(void)
 	return PARACHUTE_DEPLOY_TIME_MS;
 }
 
+/*
+ * Returns t1 as current time + 0.8 * parachute deploy time
+ */
 static inline int get_t1(void)
 {
 	return make_timeout_time_ms(0.8 * get_parachute_deploy_time());
 }
 
+/*
+ * Returns t2 as current time + 1.2 * parachute deploy time
+ */
 static inline int get_t2(void)
 {
 	return make_timeout_time_ms(1.2 * get_parachute_deploy_time());
