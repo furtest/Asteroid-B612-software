@@ -24,7 +24,6 @@ typedef struct bno_data {
 	sensors_event_t accelerometer;
 	sensors_event_t gravity;
 	int8_t temperature;
-
 } bno_data_t;
 
 /*
@@ -76,10 +75,10 @@ int bno_get_calibration(bno_calibration_t &data, Adafruit_BNO055 bno);
  */
 int bno_get_offsets(bno_calibration_t &data, Adafruit_BNO055 bno);
 int bno_save_offsets(Adafruit_BNO055 bno, int eeprom_addr = BNO055_DEFAULT_EEPROM_OFFSETS_WRITE);
-int bno_restore_offsets(bno_calibration_t cal_data, Adafruit_BNO055 bno, int eeprom_addr = BNO055_DEFAULT_EEPROM_OFFSETS_WRITE);
+int bno_restore_offsets(Adafruit_BNO055 bno, int eeprom_addr = BNO055_DEFAULT_EEPROM_OFFSETS_WRITE);
 
 int bno_calibrate_sensor(Adafruit_BNO055 bno);
 
-void printEvent(sensors_event_t* event);
+void bno_print_event(sensors_event_t &event);
 
 #endif /* DATA_BNO_H */

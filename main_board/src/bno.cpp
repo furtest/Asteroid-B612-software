@@ -77,8 +77,9 @@ int bno_save_offsets(Adafruit_BNO055 bno, int eeprom_addr)
 	return 0;
 }
 
-int bno_restore_offsets(bno_calibration_t cal_data, Adafruit_BNO055 bno, int eeprom_addr)
+int bno_restore_offsets(Adafruit_BNO055 bno, int eeprom_addr)
 {
+	bno_calibration_t cal_data;
 	sensor_t sensor;
 	bno.getSensor(&sensor);
 	long bno_id;
@@ -93,9 +94,9 @@ int bno_restore_offsets(bno_calibration_t cal_data, Adafruit_BNO055 bno, int eep
 	return 0;
 }
 
-void printEvent(sensors_event_t* event) {
+void bno_print_event(sensors_event_t &event) {
 	double x = -1000000, y = -1000000 , z = -1000000;
-	switch (event->type) {
+	switch (event.type) {
 		case SENSOR_TYPE_ACCELEROMETER:
 			Serial.print("Accl:");
 			break;
@@ -122,29 +123,29 @@ void printEvent(sensors_event_t* event) {
 			break;
 	}
 
-	switch (event->type) {
+	switch (event.type) {
 		case SENSOR_TYPE_ACCELEROMETER:
 		case SENSOR_TYPE_LINEAR_ACCELERATION:
 		case SENSOR_TYPE_GRAVITY:
-			x = event->acceleration.x;
-			y = event->acceleration.y;
-			z = event->acceleration.z;
+			x = event.acceleration.x;
+			y = event.acceleration.y;
+			z = event.acceleration.z;
 			break;
 		case SENSOR_TYPE_ORIENTATION:
-			x = event->orientation.x;
-			y = event->orientation.y;
-			z = event->orientation.z;
+			x = event.orientation.x;
+			y = event.orientation.y;
+			z = event.orientation.z;
 			break;
 		case SENSOR_TYPE_MAGNETIC_FIELD:
-			x = event->magnetic.x;
-			y = event->magnetic.y;
-			z = event->magnetic.z;
+			x = event.magnetic.x;
+			y = event.magnetic.y;
+			z = event.magnetic.z;
 			break;
 		case SENSOR_TYPE_GYROSCOPE:
 		case SENSOR_TYPE_ROTATION_VECTOR:
-			x = event->gyro.x;
-			y = event->gyro.y;
-			z = event->gyro.z;
+			x = event.gyro.x;
+			y = event.gyro.y;
+			z = event.gyro.z;
 			break;
 	}
 
