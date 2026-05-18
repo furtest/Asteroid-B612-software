@@ -5,6 +5,7 @@
 
 #include <Adafruit_BMP280.h>
 #include <Arduino.h>
+#include <WireIMXRT.h>
 
 #include "bmp.h"
 #include "debug.h"
@@ -12,7 +13,7 @@
 
 int bmp_init_sensor(flight_status_t &status)
 {
-	status.bmp = Adafruit_BMP280();
+	status.bmp = Adafruit_BMP280(&Wire1);
 
 	unsigned bmp_stat;
 	bmp_stat = status.bmp.begin();
